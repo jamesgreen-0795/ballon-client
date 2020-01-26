@@ -47,8 +47,15 @@
 			icon:'./Artifacts/hotairballon.png'
 		});
 		t.setMap(mapCtx);
-		t.position = {lat:51.454513,lng:-2.58791};
 
+	}
+
+	function wait(ms)
+	{
+		var d = new Date();
+		var d2 = null;
+		do { d2 = new Date(); }
+		while(d2-d < ms);
 	}
 
     function initMap() {
@@ -93,10 +100,12 @@
         DangerZonePlotter.setMap(map);
 
 
-		//google.maps.event.addListener(TripCoordinates, 'click', function () {
+		google.maps.event.addListener(TripCoordinates, 'click', function () {
+			BallonOverLay(RouteCoordinates[0], map);
+			BallonOverLay(RouteCoordinates[RouteCoordinates.length - 1], map);
 
-			BallonOverLay({lat:50.718412,lng:-3.533899}, map);
-		//});
+
+		});
 
 
 		
