@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+<div class="header">
+    <a href="#default" class="logo"><img src=./Artifacts/Met-office-logo.png></a>
+    <div class="header-right">
+        <a class="active" href="#home">Home</a>
+        <a href="#contact">Contact</a>
+        <a href="#about">About</a>
+    </div>
+</div>
+
+<div id="googleMap" style="width:100%;height:500px;"></div>
+
+<script>
+    function initMap() {
+
+        //Accepts an array of Coordinates then plots straight lines
+        var RouteCoordinates = [
+            {lat:51.5074,lng:0.1278},
+            {lat:50.718412,lng:-3.533899}
+        ];
+
+        var DangerZoneCoordinates = [
+            {lat:50.718412,lng:-3.533899},
+            {lat:51.454513,lng:-2.58791},
+            {lat:50.719164,lng:-1.880769}
+        ];
+
+        var mapOptions = {
+            center: new google.maps.LatLng(51.508742, -0.120850),
+            zoom: 5,
+            streetViewControl: false,
+        };
+
+        var map = new google.maps.Map(document.getElementById("googleMap"), mapOptions);
+
+        var TripCoordinates = new google.maps.Polyline({
+            path: RouteCoordinates,
+            strokeColor: '#0000FF',
+            strokeOpacity: 1.0,
+            strokeWeight: 2
+        });
+
+        var DangerZonePlotter = new google.maps.Polygon({
+            path:DangerZoneCoordinates,
+            strokeColor:"#FF0000",
+            strokeOpacity:0.8,
+            strokeWeight:2,
+            fillColor:"#ff7570",
+            fillOpacity:0.4
+        });
+        TripCoordinates.setMap(map);
+        DangerZonePlotter.setMap(map);
+
+    }
+
+</script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAt2n9uvnmGaoztltB1MNgZcwUg74AlPNg&callback=initMap"></script>
+
+</body>
+</html>
