@@ -19,16 +19,11 @@ body {
     line-height: 25px;
     border-radius: 4px;
 }
-
-div.header-right {
-    color: white;
-    padding: 25px;
-}
-
-.header-right {
-    float: right;
-}
-
+/*.banner-buttons {*/
+/*    color: white;*/
+/*    padding: 20px;*/
+/*    float: right;*/
+/*}*/
 @media screen and (max-width: 500px) {
     .header a {
         float: none;
@@ -36,7 +31,7 @@ div.header-right {
         text-align: left;
     }
 
-    .header-right {
+    .banner-buttons {
         float: none;
     }
 }
