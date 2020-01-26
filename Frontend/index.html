@@ -41,21 +41,16 @@
 		document.getElementById("message").style.display = s;
 	}
 
-	function BallonOverLay(BallonOverlayCoordinates, mapCtx) {
+	function BallonOverLay(BallonOverlayCoordinates, mapCtx, infowindow) {
 		var t = new google.maps.Marker({
 			position: BallonOverlayCoordinates,
 			icon:'./Artifacts/hotairballon.png'
 		});
 		t.setMap(mapCtx);
+		t.addListener('mouseover', function() {
+			infowindow.open(mapCtx, t);
+		});
 
-	}
-
-	function wait(ms)
-	{
-		var d = new Date();
-		var d2 = null;
-		do { d2 = new Date(); }
-		while(d2-d < ms);
 	}
 
     function initMap() {
@@ -70,6 +65,15 @@
         var DangerZoneCoordinates = [
 
         ];
+		var FlightInformationString = '<div id="content">'+
+				'<div id="siteNotice">'+
+				'</div>'+
+				'<h1 id="firstHeading" class="firstHeading">Route Info</h1>'+
+				'<div id="bodyContent">'+
+				'<p>Hight</p>'+
+				'<p>Wind</p>'+
+				'<p>somevalue</p>'
+				'</div>';
 
         var mapOptions = {
             center: new google.maps.LatLng(51.508742, -0.120850),
@@ -95,17 +99,23 @@
             fillOpacity:0.4
         });
 
+		DangerZonePlotter.setMap(map);
         TripCoordinates.setMap(map);
-		google.maps.event.addListener(TripCoordinates, 'click', showMessage);
-        DangerZonePlotter.setMap(map);
 
 
-		google.maps.event.addListener(TripCoordinates, 'click', function () {
-			BallonOverLay(RouteCoordinates[0], map);
-			BallonOverLay(RouteCoordinates[RouteCoordinates.length - 1], map);
+        google.maps.event.addListener(TripCoordinates, 'click', showMessage);
+        // google.maps.event.addListener(TripCoordinates, 'mouseover' HighLightRouteInformationOnHover);
 
 
+		var infowindow = new google.maps.InfoWindow({
+				content: FlightInformationString
 		});
+
+		var x;
+		for (x in RouteCoordinates) {
+			BallonOverLay(RouteCoordinates[x], map, infowindow);
+		}
+
 
 
 		
