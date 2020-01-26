@@ -45,3 +45,22 @@ body {
         float: none;
     }
 }
+
+#wrapper { 
+	position: relative; 
+}
+
+#message {
+	position: absolute; top: 60%; left: 80%; z-index: 99;
+	margin-right: 100px;
+	border: 2px solid black;
+	padding: 0px 10px;
+	border-radius: 10px;
+	background-color: grey;
+}
+
+#message > p:first-child {
+	text-decoration: underline;
+	font-weight: bold;
+	z-index: 100;
+}
