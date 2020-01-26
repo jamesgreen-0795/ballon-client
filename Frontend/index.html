@@ -16,9 +16,31 @@
     </div>
 </div>
 
-<div id="googleMap" style="width:100%;height:500px;"></div>
+<div id="wrapper">
+	<div id="googleMap" style="width:100%;height:500px;">
+
+	</div>
+
+	<div id="message" style="display:none">
+		<p>Flight Plan</p>
+		<p>Time: 63 mins</p>
+		<p>Total Elevation Gain: 3300m</p>
+	</div>  
+</div>
 
 <script>
+	function hideMessage() {
+		setMessageDisplay("hidden");
+	}
+
+	function showMessage() {
+		setMessageDisplay("block");
+	}
+
+	function setMessageDisplay(s) {
+		document.getElementById("message").style.display = s;
+	}
+
     function initMap() {
 
         //Accepts an array of Coordinates then plots straight lines
@@ -56,9 +78,11 @@
             fillColor:"#ff7570",
             fillOpacity:0.4
         });
-        TripCoordinates.setMap(map);
-        DangerZonePlotter.setMap(map);
 
+        TripCoordinates.setMap(map);
+		google.maps.event.addListener(TripCoordinates, 'click', showMessage);
+        DangerZonePlotter.setMap(map);
+		
     }
 
 </script>
